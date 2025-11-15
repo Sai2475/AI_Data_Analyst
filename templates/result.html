@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="py-16">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="bg-white/70 rounded-2xl shadow p-6" data-aos="fade-up">
+      <h1 class="text-xl font-bold">Result</h1>
+
+      {% if error %}
+      <div class="mt-4 p-4 bg-red-100 text-red-700 rounded">
+        <strong>Error:</strong><br>
+        <pre>{{ error }}</pre>
+      </div>
+      {% endif %}
+
+      <div class="grid md:grid-cols-2 gap-6 mt-6">
+
+        <!-- Code Block -->
+        <div class="bg-white/60 rounded-xl p-6 shadow">
+          <h3 class="font-semibold text-lg">Generated Pandas Code</h3>
+          <pre class="mt-4 p-3 bg-gray-900 text-green-200 rounded-lg text-sm overflow-auto">
+{{ code }}
+          </pre>
+
+          <div class="mt-3 flex gap-3">
+            <button id="copyBtn" class="px-4 py-2 border rounded">Copy</button>
+            <a id="downloadCode" class="px-4 py-2 border rounded">Download</a>
+          </div>
+        </div>
+
+        <!-- Result -->
+        <div class="bg-white/60 rounded-xl p-6 shadow">
+          <h3 class="font-semibold text-lg">Output</h3>
+          <div class="mt-4 overflow-x-auto">
+            {{ result_html | safe }}
+          </div>
+
+          {% if result_file %}
+          <a href="{{ url_for('download_result') }}?path={{ result_file }}"
+             class="mt-4 inline-block px-4 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 text-white">
+            Download CSV
+          </a>
+          {% endif %}
+        </div>
+
+      </div>
+
+      <div class="mt-6 flex gap-4">
+        <a href="{{ url_for('analyze_page', file_id=file_id) }}" class="px-4 py-2 border rounded">
+          Refine Question
+        </a>
+        <a href="{{ url_for('upload_page') }}" class="px-4 py-2 border rounded">
+          New Dataset
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+  document.getElementById("copyBtn")?.addEventListener("click", async () => {
+    const text = document.querySelector("pre").innerText;
+    await navigator.clipboard.writeText(text);
+    alert("Copied!");
+  });
+
+  const dl = document.getElementById("downloadCode");
+  const code = document.querySelector("pre").innerText;
+  const blob = new Blob([code], { type: "text/plain" });
+  dl.href = URL.createObjectURL(blob);
+  dl.download = "generated_code.py";
+</script>
+
+{% endblock %}

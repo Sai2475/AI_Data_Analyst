@@ -1,0 +1,23 @@
+# Python junk
+__pycache__/
+*.pyc
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Uploaded user files
+uploads/
+
+# Secret file
+.env
+
+# OS & editor junk
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Database files (if any)
+*.db
+*.sqlite3

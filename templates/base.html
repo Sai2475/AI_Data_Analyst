@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" class="antialiased">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{{ title if title else "DATAWHIZ - AI Data Analyst" }}</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- Global styles -->
+  <style>
+    body {
+      background: linear-gradient(135deg, #e9d5ff, #fbcfe8, #bfdbfe);
+      background-size: 300% 300%;
+      animation: gradientShift 12s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen">
+
+<!-- NAVBAR -->
+<header class="backdrop-blur-lg bg-white/40 shadow-sm sticky top-0 z-50">
+  <div class="max-w-6xl mx-auto flex items-center justify-between p-6"> <!-- increased p-4 → p-6 -->
+      <div class="flex items-center gap-5">
+          <img src="https://img.icons8.com/color/96/graph.png" class="h-12 w-12"> <!-- bigger -->
+          <h1 class="text-2xl font-extrabold text-purple-700">DATAWHIZ - AI Data Analyst</h1> <!-- bigger -->
+      </div>
+
+      <nav class="text-lg flex gap-8 text-gray-700"> <!-- bigger -->
+          <a href="{{ url_for('landing') }}" class="hover:text-purple-600">Home</a>
+          <a href="{{ url_for('upload_page') }}" class="hover:text-purple-600">Upload</a>
+      </nav>
+  </div>
+</header>
+
+<!-- PAGE CONTENT -->
+<main class="py-10">
+    {% block content %}
+    {% endblock %}
+</main>
+
+<!-- Footer -->
+<footer class="mt-10 text-center text-xs text-gray-600 py-6">
+  Built with ❤️ DATAWHIZ - AI Data Analyst.
+</footer>
+
+<script>
+  AOS.init();
+</script>
+
+</body>
+</html>

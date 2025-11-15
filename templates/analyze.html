@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="py-16">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="bg-white/70 rounded-2xl shadow p-6" data-aos="fade-up">
+      <h1 class="text-2xl font-bold">Analyze Dataset</h1>
+
+      <form method="POST" class="mt-6">
+        <label class="font-semibold text-gray-700">Ask a question</label>
+        <textarea name="query" rows="4"
+                  placeholder="e.g. What is the average BMI by Outcome?"
+                  class="w-full p-3 border rounded-lg mt-2"></textarea>
+
+        <p class="text-sm text-gray-600 mt-3">
+          Columns: <strong>{{ columns | join(', ') }}</strong>
+        </p>
+        <p class="text-sm text-gray-600 mt-1">
+          Try: “Count rows”, “Average of column”, “Missing values per column”
+        </p>
+
+        <div class="mt-5 flex gap-4">
+          <button type="submit"
+                  class="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 text-white">
+                  Analyze
+          </button>
+
+          <a href="{{ url_for('upload_page') }}" class="px-6 py-3 rounded-full border">
+            Upload New Dataset
+          </a>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

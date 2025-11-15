@@ -1,0 +1,5 @@
+flask>=2.0
+pandas>=1.5
+openpyxl>=3.0
+groq
+python-dotenv>=0.21.0
