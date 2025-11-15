@@ -16,18 +16,16 @@ from matplotlib.axes import Axes
 from matplotlib.image import AxesImage
 
 
-# -----------------------------
+
 # Detects if LLM generated a Styler heatmap
-# -----------------------------
 def _wants_styler_heatmap(code_str: str) -> bool:
     s = code_str.lower()
     return ("style" in s and "background_gradient" in s) or \
            ("style" in s and "highlight" in s)
 
 
-# -----------------------------
+
 # Worker executed in sandboxed process
-# -----------------------------
 def _worker(code_str, df_bytes, out_q):
     try:
         df = pickle.loads(df_bytes)
@@ -43,9 +41,8 @@ def _worker(code_str, df_bytes, out_q):
 
         result = safe_locals.get("result", None)
 
-        # ---------------------------------------------------
+
         # Case 1: Pandas Styler (return as HTML)
-        # ---------------------------------------------------
         if isinstance(result, Styler):
             try:
                 html = result.to_html()
@@ -55,9 +52,7 @@ def _worker(code_str, df_bytes, out_q):
                 out_q.put(("ok", str(result)))
                 return
 
-        # ---------------------------------------------------
         # Case 2: Detect matplotlib Figure / Axes / AxesImage
-        # ---------------------------------------------------
         fig = None
 
         if isinstance(result, Figure):
@@ -87,9 +82,7 @@ def _worker(code_str, df_bytes, out_q):
             out_q.put(("plot", img_bytes))
             return
 
-        # ---------------------------------------------------
         # Normal outputs (DataFrame / Series / scalar)
-        # ---------------------------------------------------
         if isinstance(result, (pd.DataFrame, pd.Series)):
             out_q.put(("ok", result))
             return
@@ -112,9 +105,8 @@ def _worker(code_str, df_bytes, out_q):
         return
 
 
-# -----------------------------
+
 # Public API
-# -----------------------------
 def run_code_safely(code_str, df, timeout=15):
     """
     Runs user/LLM-generated Pandas code in a separate process (sandbox).

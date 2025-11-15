@@ -1,9 +1,8 @@
 import os
 from groq import Groq
 
-# -------------------------------
+
 # CLEAN CODE BLOCKS
-# -------------------------------
 def _strip_code_blocks(text):
     text = text.strip()
 
@@ -26,9 +25,8 @@ def _strip_code_blocks(text):
     return text
 
 
-# -------------------------------
+
 # GENERATE CODE FROM QUERY
-# -------------------------------
 def generate_code(query: str, columns=None) -> str:
 
     print("GroqHandler sees key:", os.getenv("GROQ_API_KEY"))  # DEBUG

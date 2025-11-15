@@ -158,7 +158,7 @@ def analyze_page(file_id):
             result_html = res["result"]  # already HTML
             return render_template("result.html", code=code, result_html=result_html, file_id=file_id, result_file=None)
 
-        # ---- Normal result (DataFrame / scalar) ----
+        # ---- Normal result  ----
         if res["status"] == "ok":
             result = res["result"]
 
@@ -190,9 +190,7 @@ def download_result():
         download_name=os.path.basename(path)
     )
 
-# -------------------------------
-# THIS BLOCK MUST BE LAST
-# -------------------------------
+
 if __name__ == "__main__":
     import multiprocessing
     multiprocessing.freeze_support()
