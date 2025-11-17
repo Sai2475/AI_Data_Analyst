@@ -3,4 +3,4 @@ pandas>=1.5
 openpyxl>=3.0
 groq
 python-dotenv>=0.21.0
-vercel-wsgi
+gunicorn
