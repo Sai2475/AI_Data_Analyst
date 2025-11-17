@@ -4,3 +4,4 @@ openpyxl>=3.0
 groq
 python-dotenv>=0.21.0
 gunicorn
+plotly>=5.18.0
