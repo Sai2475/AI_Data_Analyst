@@ -2,6 +2,11 @@
 
 An interactive AI-powered web application for seamless and secure data analysis. Ask questions about your datasets in natural language and get instant answers, visualizations, and exportable results!
 
+🟢 **Live Demo:**  
+Visit the app at [https://datawhiz-ai.onrender.com/](https://datawhiz-ai.onrender.com/)
+
+---
+
 ## 🚀 Features
 
 - **Upload CSV/Excel files** directly
