@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: datawhiz-ai
+    env: python
+    buildCommand: |
+      apt-get update && \
+      apt-get install -y libfreetype6-dev libxft-dev libpng-dev && \
+      pip install -r requirements.txt
+    startCommand: gunicorn app:app
